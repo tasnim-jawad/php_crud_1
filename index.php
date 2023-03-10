@@ -1,25 +1,19 @@
 <?php 
-    error_reporting(E_ALL);
-    ini_set('display_errors', '1');
+    // error_reporting(E_ALL);
+    // ini_set('display_errors', '1');
 
     include "./classes/student.php";
     $student1 = new Student();
 
-    if (isset($_POST)){
-
-        // echo "<pre>";
-        // print_r($_POST);
-        // die();
+    if (isset($_POST['add_user'])){
+        // echo 11; die();
         $student1->add_student($_POST);
     }
 
+    $students = $student1->show_student();
+    // echo "<pre>"; print_r($students); die();
 
 ?>
-
-
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -41,7 +35,7 @@
             </div>
             <div class="row ">
                 <div class="col-4">
-                    <form class="shadow p-4" action="" method="POST" >
+                    <form class="shadow p-4" method="POST">
                         <h2 class="display-4 text-center text-info">Student Info</h2>
                         <div class="form-group pb-3">
                             <label for="name">Name</label>
@@ -69,60 +63,17 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php $i=1; while($student = mysqli_fetch_assoc($students)){ ?>
                             <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td><?= $i++; ?></td>
+                                <td><?= $student['name']; ?></td>
+                                <td><?= $student['email']; ?></td>
+                                <td>
+                                    <a href="">Edit</a>
+                                    <a href="">Delete</a>
+                                </td>
                             </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+                            <?php }; ?>
                         </tbody>
                     </table>
                 </div>
